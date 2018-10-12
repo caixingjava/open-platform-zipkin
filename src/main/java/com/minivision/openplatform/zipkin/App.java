@@ -2,8 +2,11 @@ package com.minivision.openplatform.zipkin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.sleuth.zipkin.stream.EnableZipkinStreamServer;
+import org.springframework.context.annotation.Bean;
 import zipkin.server.EnableZipkinServer;
+import zipkin.storage.mysql.MySQLStorage;
+
+import javax.sql.DataSource;
 
 /**
  * <Description> zipkin的入口类 <br>
@@ -13,7 +16,7 @@ import zipkin.server.EnableZipkinServer;
  * @CreateDate 2018年10月09日 <br>
  */
 
-@EnableZipkinStreamServer
+@EnableZipkinServer
 @SpringBootApplication
 public class App {
 
@@ -25,6 +28,11 @@ public class App {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
+	}
+
+	@Bean
+	public MySQLStorage mySQLStorage(DataSource datasource) {
+		return MySQLStorage.builder().datasource(datasource).executor(Runnable::run).build();
 	}
 
 }
