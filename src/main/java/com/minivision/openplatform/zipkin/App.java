@@ -1,5 +1,6 @@
 package com.minivision.openplatform.zipkin;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 
 @EnableZipkinServer
 @SpringBootApplication
+@EnableApolloConfig
 public class App {
 
 	/**
